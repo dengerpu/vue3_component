@@ -1,14 +1,10 @@
 
 
 import fs from 'fs';
-const msg = ''
-fs.readFile('.git/COMMIT_EDITMSG', 'utf-8', (err, data) => {
-  if (err) return err;
-  msg = data
-})
+const msg = fs.readFileSync('.git/COMMIT_EDITMSG', 'utf-8')
   
 
-const commitRE = /^(revert: )?(feat|fix|docs|dx|style|refactor|perf|test|workflow|build|ci|chore|types|wip|release)(\(.+\))?: .{1,50}/
+const commitRE = /^(revert: )?(feat|fix|docs|dx|style|refactor|perf|test|workflow|build|ci|chore|types|wip|release)(\(.+\))?:.{1,50}/
 const mergeRe = /^(Merge pull request|Merge branch)/
 if (!commitRE.test(msg)) {
   if(!mergeRe.test(msg)){

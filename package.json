@@ -2,21 +2,30 @@
   "name": "vue3_component",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest"
   },
   "dependencies": {
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
+    "@types/jest": "^29.5.5",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/test-utils": "^2.4.0-alpha.2",
+    "babel-jest": "^26.6.3",
     "husky": "^8.0.3",
+    "jest": "^26.6.3",
     "sass": "^1.69.3",
+    "ts-jest": "^26.5.6",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
+    "vue-jest": "^5.0.0-alpha.10",
     "vue-tsc": "^1.8.5"
   }
 }

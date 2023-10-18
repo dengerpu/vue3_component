@@ -1,7 +1,7 @@
 import Button from './Button.vue'
 import { mount } from '@vue/test-utils'
 describe('按钮测试', () => {
-  it('按钮能够显示文本', () => {
+  it('显示文本', () => {
     const content = '测试内容'
     const wrapper = mount(Button, {
       slots: {
@@ -10,6 +10,7 @@ describe('按钮测试', () => {
     })
     expect(wrapper.text()).toBe(content)
   })
+
   it('通过size属性控制大小', () => {
     const size = 'small'
     const wrapper = mount(Button, {
@@ -18,6 +19,33 @@ describe('按钮测试', () => {
       }
     })
     // size内部通过class控制
-    expect(wrapper.classes()).toContain('el-button--small')
+    expect(wrapper.classes()).toContain(`el-button--${size}`)
   })
+  it('全局设置按钮默认大小', () => {
+    const size = 'mini'
+    const wrapper = mount(Button, {
+      global: {
+        config: {
+          globalProperties: {
+            $AILEMENTE: {
+              size
+            }
+          }
+        }
+      }
+    })
+
+    expect(wrapper.classes()).toContain(`el-button--${size}`)
+  })
+
+  it('按钮主题 ', () => {
+    const type = 'success'
+    const wrapper = mount(Button, {
+      props: {
+        type
+      }
+    })
+    expect(wrapper.classes()).toContain(`el-button--${type}`)
+  })
+
 })

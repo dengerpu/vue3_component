@@ -2,16 +2,51 @@
   <el-container>
     <el-header>Header</el-header>
     <el-main>
-      <el-button type="primary">
-        按钮
-      </el-button>
-      <el-button type="success">
-        按钮
-      </el-button>
-      <el-button>按钮</el-button>
-      <el-button size="small">
-        按钮
-      </el-button>
+      <div>
+        <el-button type="primary">
+          按钮
+        </el-button>
+        <el-button type="success">
+          按钮
+        </el-button>
+        <el-button>按钮</el-button>
+        <el-button size="small">
+          按钮
+        </el-button>
+      </div>
+      <div>
+        <el-form
+          ref="myForm"
+          :model="model"
+          :rules="rules"
+          style="width: 460px;"
+        >
+          <el-form-item
+            label="用户名："
+            prop="username"
+          >
+            <el-input v-model="model.username" />
+          </el-form-item>
+          <el-form-item
+            label="密码："
+            prop="password"
+          >
+            <el-input
+              v-model="model.password"
+              type="password"
+            />
+          </el-form-item>
+          <br>
+          <el-form-item>
+            <el-button
+              type="primary"
+              @click="login"
+            >
+              登 录
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </div>    
     </el-main>
     <el-footer>Footer</el-footer>
   </el-container>
@@ -19,6 +54,38 @@
 </template>
 
 <script setup lang="ts">
+import {ref, reactive} from 'vue'
+import {FormType} from './components/form/type'
+const model = reactive({
+  username: "",
+  password: "",
+})
+
+const rules = reactive({
+  username: [
+    {
+      required: true,
+      message: "请输入用户名！",
+    },
+  ],
+  password: [
+    {
+      required: true,
+      message: "请输入密码！",
+    },
+  ],
+})
+// 获取表单实例
+const myForm = ref<FormType>()
+const login = () => {
+  myForm.value?.validate((isValid) => {
+    if (isValid) {
+      console.log(model)
+    } else {
+      alert("请正确填写表单！")
+    }
+  })
+}
 </script>
 
 <style scoped>
